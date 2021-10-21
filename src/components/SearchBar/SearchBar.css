@@ -1,0 +1,17 @@
+.search-bar-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 15px;
+  background: #fff;
+  font-size: 25px;
+}
+.search-bar-input {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  margin-left: 1rem;
+}
+.search-bar-input:focus {
+  outline: none;
+}

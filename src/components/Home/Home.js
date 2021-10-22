@@ -7,8 +7,9 @@ const Home = () => {
   const [usersInfo, setUsersInfo] = useState({
     users: null,
     filteredUsers: null,
-    erros: null,
+    error: null,
     isLoading: true,
+    searchValue: "",
   });
   useEffect(async () => {
     try {
@@ -19,14 +20,33 @@ const Home = () => {
         return {
           ...prevState,
           users: data,
-
+          filteredUsers: data,
           isLoading: false,
         };
       });
     } catch (err) {
       console.log(err);
+      setUsersInfo((prevState) => {
+        return {
+          ...prevState,
+          error: err,
+          isLoading: false,
+        };
+      });
     }
   }, []);
+
+  const searchHandler = (e) => {
+    setUsersInfo((prevState) => {
+      return {
+        ...prevState,
+        searchValue: e.target.value,
+        filteredUsers: prevState.users.filter((user) =>
+          user.name.toLowerCase().includes(e.target.value.toLowerCase())
+        ),
+      };
+    });
+  };
 
   return (
     <div>
@@ -34,8 +54,11 @@ const Home = () => {
         <h1>Loading</h1>
       ) : (
         <div className="container">
-          <SearchBar />
-          <UserList users={usersInfo.users} />
+          <SearchBar
+            searchValue={usersInfo.searchValue}
+            searchHandler={searchHandler}
+          />
+          <UserList users={usersInfo.filteredUsers} />
         </div>
       )}
     </div>

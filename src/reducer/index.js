@@ -3,9 +3,9 @@ import { ERROR, FILTER_USERS, GET_USERS, USER_DETAILS } from "../constants";
 const initialState = {
   users: [],
   filteredUsers: [],
-  userDetails: null,
+  userDetails: [],
   error: null,
-  IsLoading: true,
+  isLoading: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,14 +16,14 @@ const reducer = (state = initialState, action) => {
         users: action.payload,
         filteredUsers: action.payload,
         error: null,
-        IsLoading: false,
+        isLoading: false,
       };
     case FILTER_USERS:
       return {
         ...state,
-        filteredUsers: state.users
-          .toLowerCase()
-          .includes(action.payload.toLowerCase()),
+        filteredUsers: state.users.filter((user) =>
+          user.name.toLowerCase().includes(action.payload.toLowerCase())
+        ),
       };
     case USER_DETAILS:
       return {
@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
-        IsLoading: false,
+        isLoading: false,
       };
     default:
       return state;

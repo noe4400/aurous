@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import "./UserList.css";
 const UserList = ({ users }) => {
@@ -8,7 +9,9 @@ const UserList = ({ users }) => {
       <Card>
         <ul>
           {users.map((user) => (
-            <li key={user.id}>{user.name}</li>
+            <li key={user.id}>
+              <Link to={`/userDetails/${user.id}`}>{user.name}</Link>
+            </li>
           ))}
         </ul>
       </Card>

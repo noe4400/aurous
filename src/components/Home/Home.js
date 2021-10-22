@@ -2,63 +2,30 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import SearchBar from "../SearchBar/SearchBar";
 import UserList from "../UsersList/UserList";
-import axios from "axios";
-const Home = () => {
-  const [usersInfo, setUsersInfo] = useState({
-    users: null,
-    filteredUsers: null,
-    error: null,
-    isLoading: true,
-    searchValue: "",
-  });
-  useEffect(async () => {
-    try {
-      const { data } = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setUsersInfo((prevState) => {
-        return {
-          ...prevState,
-          users: data,
-          filteredUsers: data,
-          isLoading: false,
-        };
-      });
-    } catch (err) {
-      console.log(err);
-      setUsersInfo((prevState) => {
-        return {
-          ...prevState,
-          error: err,
-          isLoading: false,
-        };
-      });
-    }
-  }, []);
+import { useSelector, useDispatch } from "react-redux";
+import { getUsers } from "../../actions";
+import Loading from "../Loading/Loading";
 
-  const searchHandler = (e) => {
-    setUsersInfo((prevState) => {
-      return {
-        ...prevState,
-        searchValue: e.target.value,
-        filteredUsers: prevState.users.filter((user) =>
-          user.name.toLowerCase().includes(e.target.value.toLowerCase())
-        ),
-      };
-    });
-  };
+const Home = () => {
+  const { isLoading, filteredUsers, users, error } = useSelector(
+    (state) => state
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (users.length === 0) {
+      dispatch(getUsers());
+    }
+  }, [dispatch]);
 
   return (
     <div>
-      {usersInfo.isLoading ? (
-        <h1>Loading</h1>
+      {isLoading ? (
+        <Loading />
       ) : (
         <div className="container">
-          <SearchBar
-            searchValue={usersInfo.searchValue}
-            searchHandler={searchHandler}
-          />
-          <UserList users={usersInfo.filteredUsers} />
+          <SearchBar />
+          <UserList users={filteredUsers} />
         </div>
       )}
     </div>

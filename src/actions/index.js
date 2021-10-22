@@ -26,9 +26,9 @@ export const filterUsers = (filter) => (dispatch) => {
   });
 };
 
-export const userDetails = (id) => (dispatch) => {
+export const getUserDetails = (id) => (dispatch) => {
   dispatch({
     type: USER_DETAILS,
-    payload: id,
+    payload: parseInt(id),
   });
 };

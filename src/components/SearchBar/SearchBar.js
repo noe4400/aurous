@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { filterUsers } from "../../actions";
 const SearchBar = () => {
@@ -11,7 +11,10 @@ const SearchBar = () => {
     dispatch(filterUsers(e.target.value));
     setSearchValue(e.target.value);
   };
-
+  const clearHandler = () => {
+    dispatch(filterUsers(""));
+    setSearchValue("");
+  };
   return (
     <div className="search-bar-container">
       <FontAwesomeIcon icon={faSearch} />
@@ -22,6 +25,9 @@ const SearchBar = () => {
         onChange={searchHandler}
         className="search-bar-input"
       />
+      {searchValue.length > 0 && (
+        <FontAwesomeIcon icon={faTimes} onClick={clearHandler} />
+      )}
     </div>
   );
 };

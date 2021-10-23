@@ -1,0 +1,32 @@
+.details-container {
+  margin: auto;
+  width: 80%;
+}
+#details {
+  margin-top: 5rem;
+}
+.item {
+  margin-top: 10px;
+  padding-top: 10px;
+  color: var(--dark-gray);
+}
+.item span {
+  font-weight: 900;
+  color: var(--dark-gray);
+}
+.back-btn {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.back-btn .icon {
+  margin-right: 0.5rem;
+}
+.back-btn a {
+  text-decoration: none;
+}
+@media screen and (max-width: 400px) {
+  .details-container {
+    width: 100%;
+  }
+}

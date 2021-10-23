@@ -1,5 +1,12 @@
 .container {
-  margin-top: 5rem;
   margin: auto;
   width: 80%;
+}
+#home {
+  margin-top: 5rem;
+}
+@media screen and (max-width: 400px) {
+  .container {
+    width: 100%;
+  }
 }

@@ -9,7 +9,7 @@ const UserList = ({ users }) => {
       <Card>
         <ul>
           {users.map((user) => (
-            <li key={user.id}>
+            <li key={user.id} className="item">
               <Link to={`/userDetails/${user.id}`}>{user.name}</Link>
             </li>
           ))}

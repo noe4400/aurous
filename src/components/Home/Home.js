@@ -23,7 +23,7 @@ const Home = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="container">
+        <div className="container" id="home">
           <SearchBar />
           <UserList users={filteredUsers} />
         </div>

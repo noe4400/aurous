@@ -4,5 +4,5 @@
 
 ```bash
   npm install
-  run start
+  npm start
 ```
